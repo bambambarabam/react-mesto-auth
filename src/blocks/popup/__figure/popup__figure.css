@@ -1,0 +1,9 @@
+.popup__figure {
+  width: max-content;
+  margin: 90px auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  position: relative;
+}
