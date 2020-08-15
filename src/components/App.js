@@ -53,13 +53,36 @@ function App() {
         button="Сохранить"
         isOpen={isEditProfilePopupOpen}
         onClose={closeAllPopups}>
-        <input type="text" value="" placeholder="Ваше имя" className="popup__input" name="name" minlength="2"
-          maxlength="40" id="name" required />
-        <span className="popup__error" id="name-error"></span>
+        <input
+          type="text"
+          defaultValue=""
+          placeholder="Ваше имя"
+          className="popup__input"
+          name="name"
+          minLength="2"
+          maxLength="40" id="name"
+          required
+        />
+        <span
+          className="popup__error"
+          id="name-error"
+        />
 
-        <input type="text" value="" placeholder="Ваше занятие" className="popup__input" name="job" required minlength="2"
-          maxlength="200" id="job" />
-        <span className="popup__error" id="job-error"></span>
+        <input
+          type="text"
+          defaultValue=""
+          placeholder="Ваше занятие"
+          className="popup__input"
+          name="job"
+          required
+          minLength="2"
+          maxLength="200"
+          id="job"
+        />
+        <span
+          className="popup__error"
+          id="job-error"
+        />
       </PopupWithForm>
 
       <PopupWithForm
@@ -68,13 +91,35 @@ function App() {
         button="Создать"
         isOpen={isAddPlacePopupOpen}
         onClose={closeAllPopups}>
-        <input type="text" value="" placeholder="Название" className="popup__input" name="placename" minlength="1"
-          maxlength="30" id="placename" required />
-        <span className="popup__error" id="placename-error"></span>
+        <input
+          type="text"
+          defaultValue=""
+          placeholder="Название"
+          className="popup__input"
+          name="placename"
+          minLength="1"
+          maxLength="30"
+          id="placename"
+          required
+        />
+        <span
+          className="popup__error"
+          id="placename-error" /
+        >
 
-        <input type="url" value="" placeholder="Ссылка на картинку" className="popup__input" name="link" id="link"
-          required />
-        <span className="popup__error" id="link-error"></span>
+        <input
+          type="url"
+          defaultValue=""
+          placeholder="Ссылка на картинку"
+          className="popup__input"
+          name="link"
+          id="link"
+          required
+        />
+        <span
+          className="popup__error"
+          id="link-error"
+        />
       </PopupWithForm>
 
       <PopupWithForm
@@ -83,9 +128,19 @@ function App() {
         button="Создать"
         isOpen={isEditAvatarPopupOpen}
         onClose={closeAllPopups}>
-        <input type="url" className="popup__input" value="" placeholder="Ссылка на картинку" name="link" id="link"
-          required />
-        <span className="popup__error" id="link-error"></span>
+        <input
+          type="url"
+          className="popup__input"
+          defaultValue=""
+          placeholder="Ссылка на картинку"
+          name="link"
+          id="link"
+          required
+        />
+        <span
+          className="popup__error"
+          id="link-error"
+        />
       </PopupWithForm>
 
       <PopupWithForm
