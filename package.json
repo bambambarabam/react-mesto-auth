@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "description": "project work #10",
   "author": "Slava Lebedintsev",
-  "homepage": "https://github.com/bambambarabam/mesto-react",
+  "homepage": "https://bambambarabam.github.io/mesto-react/",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
