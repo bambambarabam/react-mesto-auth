@@ -104,8 +104,8 @@ function App() {
         />
         <span
           className="popup__error"
-          id="placename-error" /
-        >
+          id="placename-error"
+        />
 
         <input
           type="url"

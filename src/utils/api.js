@@ -17,6 +17,9 @@ class Api {
       headers: this.headers
     })
       .then(this._response)
+      .catch((err) => {
+        console.error(err)
+      })
   }
 
   getUserInfo() {

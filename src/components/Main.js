@@ -29,10 +29,12 @@ function Main({ onEditAvatar, onEditProfile, onAddPlace, onCardClick }) {
           <img
             className="profile__avatar"
             src={userAvatar}
-            alt="Аватар." />
+            alt="Аватар."
+          />
           <div
             className="profile__avatar-edit"
-            onClick={onEditAvatar} />
+            onClick={onEditAvatar}
+          />
         </div>
         <div className="profile__info">
           <div className="profile__name">
