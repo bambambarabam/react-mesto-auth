@@ -30,65 +30,58 @@ class Api {
       .then(this._response)
   }
 
-  editUserInfo(userName, userJob) {
+  editUserInfo(data) {
     return fetch(`${this.baseUrl}/users/me`, {
       method: 'PATCH',
       headers: this.headers,
       body: JSON.stringify({
-        name: userName,
-        about: userJob
+        name: data.name,
+        about: data.about
       }),
     })
       .then(this._response)
   }
 
-  addNewCard(cardName, cardLink) {
+  addNewCard(data) {
     return fetch(`${this.baseUrl}/cards`, {
       method: 'POST',
       headers: this.headers,
       body: JSON.stringify({
-        name: cardName,
-        link: cardLink
+        name: data.name,
+        link: data.link
       }),
     })
       .then(this._response)
   }
 
-  removeCard(id) {
+  deleteCard(id) {
     return fetch(`${this.baseUrl}/cards/${id}`, {
       method: 'DELETE',
-      headers: this.headers
+      headers: this.headers,
     })
       .then(this._response)
   }
 
-  addLike(id) {
+  changeLikeCardStatus(id, status) {
     return fetch(`${this.baseUrl}/cards/likes/${id}`, {
-      method: 'PUT',
-      headers: this.headers
+      method: `${(status) ? `PUT` : `DELETE`}`,
+      headers: this.headers,
     })
       .then(this._response)
   }
 
-  delLike(id) {
-    return fetch(`${this.baseUrl}/cards/likes/${id}`, {
-      method: 'DELETE',
-      headers: this.headers
-    })
-      .then(this._response)
-  }
-
-  editAvatar(userAvatar) {
+  editUserAvatar(user) {
     return fetch(`${this.baseUrl}/users/me/avatar`, {
       method: 'PATCH',
       headers: this.headers,
       body: JSON.stringify({
-        avatar: userAvatar
+        avatar: user.avatar
       })
     })
       .then(this._response)
   }
 }
+
 const api = new Api({
   baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-13',
   headers: {

@@ -6,6 +6,7 @@
 @import url(./__fav-container/element__fav-container.css);
 @import url(./__fav/_active/element__fav_active.css);
 @import url(./__del/element__del.css);
+@import url(./__del/_hidden/element__del_hidden.css);
 
 .element {
   max-width: 282px;
