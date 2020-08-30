@@ -28,21 +28,24 @@ function App() {
       api.getInitialCards()
     ])
       .then(([user, initialCards]) => {
-        setCurrentUser(user);
         setCards(initialCards);
+        setCurrentUser(user);
       })
       .catch((err) => {
         console.log(err);
       });
-  }, []);
+  }, [cards]);
 
   function handleCardLike(card) {
     const isLiked = card.likes.some(i => i._id === currentUser._id);
     api.changeLikeCardStatus(card._id, !isLiked)
-    .then((newCard) => {
-      const newCards = cards.map((c) => c._id === card._id ? newCard : c);
-      setCards(newCards);
-    });
+      .then((newCard) => {
+        const newCards = cards.map((c) => c._id === card._id ? newCard : c);
+        setCards(newCards);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
   function handleCardDeleteSubmit() {
@@ -52,6 +55,9 @@ function App() {
         setCards(newCards);
         closeAllPopups();
       })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
   function handleUpdateUser(user) {
@@ -60,10 +66,13 @@ function App() {
       .then((res) => {
         setCurrentUser(res);
       })
+      .catch((err) => {
+        console.log(err);
+      })
       .finally(() => {
         closeAllPopups();
         setIsLoading(false)
-      })
+      });
   }
 
   function handleUpdateAvatar(user) {
@@ -72,10 +81,13 @@ function App() {
       .then((res) => {
         setCurrentUser(res);
       })
+      .catch((err) => {
+        console.log(err);
+      })
       .finally(() => {
         closeAllPopups();
         setIsLoading(false)
-      })
+      });
   }
 
   function handleAddPlaceSubmit(card) {
@@ -84,10 +96,13 @@ function App() {
       .then((res) => {
         setCards([...cards, res]);
       })
+      .catch((err) => {
+        console.log(err);
+      })
       .finally(() => {
         closeAllPopups();
         setIsLoading(false);
-      })
+      });
   }
 
   function handleEditProfileClick() {

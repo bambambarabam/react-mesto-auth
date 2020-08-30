@@ -28,6 +28,9 @@ class Api {
       headers: this.headers
     })
       .then(this._response)
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
   editUserInfo(data) {
@@ -40,6 +43,9 @@ class Api {
       }),
     })
       .then(this._response)
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
   addNewCard(data) {
@@ -52,6 +58,9 @@ class Api {
       }),
     })
       .then(this._response)
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
   deleteCard(id) {
@@ -60,6 +69,9 @@ class Api {
       headers: this.headers,
     })
       .then(this._response)
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
   changeLikeCardStatus(id, status) {
@@ -68,6 +80,9 @@ class Api {
       headers: this.headers,
     })
       .then(this._response)
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
   editUserAvatar(user) {
@@ -79,6 +94,9 @@ class Api {
       })
     })
       .then(this._response)
+      .catch((err) => {
+        console.log(err);
+      });
   }
 }
 
