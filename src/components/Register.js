@@ -33,7 +33,7 @@ function Register(handleRegister) {
       <section className="register">
         <form
           className="register__form"
-           onSubmit={handleSubmit}
+          onSubmit={handleSubmit}
           noValidate>
           <h2
             className="register__header">
@@ -52,7 +52,7 @@ function Register(handleRegister) {
             placeholder="Password"
             value={password}
             name="Password"
-          onChange={handleChange}
+            onChange={handleChange}
           >
           </input>
           <button
@@ -69,7 +69,7 @@ function Register(handleRegister) {
           </div>
         </form>
       </section>
-      <Footer/>
+      <Footer />
     </>
   );
 }
