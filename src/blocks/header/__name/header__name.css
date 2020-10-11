@@ -1,0 +1,15 @@
+.header__name {
+  font-size: 18px;
+  line-height: 22px;
+  font-weight: normal;
+  text-align: right;
+  transition: .7s ease;
+  color: #fff;
+  text-decoration: none;
+}
+
+.header__name:hover {
+  cursor: pointer;
+  color: #ccc;
+  transition: .7s ease;
+}

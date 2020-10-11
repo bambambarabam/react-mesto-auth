@@ -1,5 +1,8 @@
 import React from 'react';
 import api from '../utils/api';
+
+import { Route, Switch, Redirect, useHistory, useLocation } from 'react-router-dom';
+
 import Header from './Header';
 import Main from './Main';
 import Footer from './Footer';
@@ -8,6 +11,8 @@ import EditProfilePopup from './EditProfilePopup';
 import EditAvatarPopup from './EditAvatarPopup';
 import PopupWithConfirm from './PopupWithConfirm';
 import ImagePopup from './ImagePopup';
+import Register from './Register';
+import ProtectedRoute from './ProtectedRoute';
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
 
 function App() {
@@ -21,6 +26,8 @@ function App() {
   const [currentUser, setCurrentUser] = React.useState({ name: '', about: '', avatar: '' });
   const [cardDelete, setCardDelete] = React.useState([]);
   const [cards, setCards] = React.useState([]);
+
+  const [loggedIn, setLoggedIn] = React.useState(false);
 
   React.useEffect(() => {
     Promise.all([
@@ -141,46 +148,67 @@ function App() {
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
+      <Main
+        onEditProfile={handleEditProfileClick}
+        onAddPlace={handleAddPlaceClick}
+        onEditAvatar={handleEditAvatarClick}
+        cards={cards}
+        onCardClick={handleCardClick}
+        onCardLike={handleCardLike}
+        onCardDelete={handleCardDelete}
+      />
+      <EditProfilePopup
+        isOpen={isEditProfilePopupOpen}
+        onClose={closeAllPopups}
+        onUpdateUser={handleUpdateUser}
+        isLoading={isLoading}
+      />
+      <EditAvatarPopup
+        isOpen={isEditAvatarPopupOpen}
+        onClose={closeAllPopups}
+        onUpdateAvatar={handleUpdateAvatar}
+        isLoading={isLoading}
+      />
+      <AddPlacePopup
+        isOpen={isAddPlacePopupOpen}
+        onClose={closeAllPopups}
+        onAddPlace={handleAddPlaceSubmit}
+        isLoading={isLoading}
+      />
+      <ImagePopup
+        isOpen={selectedCard}
+        card={isImagePopupOpen}
+        onClose={closeAllPopups}
+      />
+      <PopupWithConfirm
+        isOpen={isConfirmPopupOpen}
+        onClose={closeAllPopups}
+        onSubmit={handleCardDeleteSubmit}
+      />
       <div className="page">
-        <Header />
-        <Main
-          onEditProfile={handleEditProfileClick}
-          onAddPlace={handleAddPlaceClick}
-          onEditAvatar={handleEditAvatarClick}
-          cards={cards}
-          onCardClick={handleCardClick}
-          onCardLike={handleCardLike}
-          onCardDelete={handleCardDelete}
-        />
-        <EditProfilePopup
-          isOpen={isEditProfilePopupOpen}
-          onClose={closeAllPopups}
-          onUpdateUser={handleUpdateUser}
-          isLoading={isLoading}
-        />
-        <EditAvatarPopup
-          isOpen={isEditAvatarPopupOpen}
-          onClose={closeAllPopups}
-          onUpdateAvatar={handleUpdateAvatar}
-          isLoading={isLoading}
-        />
-        <AddPlacePopup
-          isOpen={isAddPlacePopupOpen}
-          onClose={closeAllPopups}
-          onAddPlace={handleAddPlaceSubmit}
-          isLoading={isLoading}
-        />
-        <ImagePopup
-          isOpen={selectedCard}
-          card={isImagePopupOpen}
-          onClose={closeAllPopups}
-        />
-        <PopupWithConfirm
-          isOpen={isConfirmPopupOpen}
-          onClose={closeAllPopups}
-          onSubmit={handleCardDeleteSubmit}
-        />
-        <Footer />
+        <Switch>
+          <ProtectedRoute exact path='/'
+            loggedIn={loggedIn}
+            component={Page}
+            onEditProfile={onEditProfile}
+            onAddPlace={onAddPlace}
+            onEditAvatar={onEditAvatar}
+            onCardClick={handleCardClick}
+            cards={cards}
+            onCardLike={handleCardLike}
+            userData={userData}
+            signOut={signOut}
+          />
+          <Route path='/sign-up'>
+            <Register handleRegister={handleRegister} />
+          </Route>
+          <Route path='/sign-in'>
+            <Login handleLogin={handleLogin} />
+          </Route>
+          <Route>
+            {<Redirect to={`${loggedIn ? '/' : '/sign-up'}`} />}
+          </Route>
+        </Switch>
       </div>
     </CurrentUserContext.Provider>
   );
