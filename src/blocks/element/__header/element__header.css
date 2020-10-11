@@ -1,0 +1,12 @@
+.element__header {
+  max-width: 210px;
+  font-weight: 900;
+  font-size: 24px;
+  line-height: 29px;
+  color: #000;
+  /* margin: auto 0 24px 21px; */
+  margin-left: 20px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}

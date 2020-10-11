@@ -1,0 +1,22 @@
+@import url(./__img/element__img.css);
+@import url(./__title/element__title.css);
+@import url(./__header/element__header.css);
+@import url(./__fav/element__fav.css);
+@import url(./__fav-count/element__fav-count.css);
+@import url(./__fav-container/element__fav-container.css);
+@import url(./__fav/_active/element__fav_active.css);
+@import url(./__del/element__del.css);
+@import url(./__del/_hidden/element__del_hidden.css);
+
+.element {
+  max-width: 282px;
+  min-height: 361px;
+  background-color: #fff;
+  border-radius: 10px;
+  margin: 0;
+  position: relative;
+  cursor: pointer;
+  overflow: hidden;
+  display: flex;
+  flex-wrap: wrap;
+}

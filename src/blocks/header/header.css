@@ -1,0 +1,20 @@
+@import url(./__logo/header__logo.css);
+@import url(./__info/header__info.css);
+@import url(./__name/header__name.css);
+@import url(./__out/header__out.css);
+@import url(./__status/header__status.css);
+@import url(./__user/header__user.css);
+
+.header {
+  min-width: calc(100% - 398px);
+  margin: 0 auto;
+  padding-top: 45px;
+  border-bottom: 1px solid rgba(84, 84, 84, 0.7);
+}
+
+@media all and (max-width: 1080px) {
+  .header {
+    min-width: 100%;
+    padding-top: 28px;
+  }
+}

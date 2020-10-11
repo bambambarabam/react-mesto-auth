@@ -1,0 +1,25 @@
+.profile__button {
+  min-width: 150px;
+  max-height: 50px;
+  background-color: #000;
+  color: #fff;
+  border: 2px solid #fff;
+  border-radius: 2px;
+  font-size: 40px;
+  padding: 0;
+  margin: 35px 0 0 0;
+  cursor: pointer;
+  transition: opacity 1s linear .1s;
+  outline: none;
+}
+
+.profile__button:hover {
+  opacity: .6;
+}
+
+@media all and (max-width: 1080px) {
+  .profile__button {
+    min-width: 282px;
+    margin: 0;
+  }
+}

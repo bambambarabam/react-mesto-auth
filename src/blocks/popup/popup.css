@@ -1,0 +1,33 @@
+@import url(./__button/popup__button.css);
+@import url(./__close/popup__close.css);
+@import url(./__form/popup__form.css);
+@import url(./__input/popup__input.css);
+@import url(./__name/popup__name.css);
+@import url(./__figure/popup__figure.css);
+@import url(./__image/popup__image.css);
+@import url(./__subtitle/popup__subtitle.css);
+@import url(./__create/popup__create.css);
+@import url(./__error/popup__error.css);
+@import url(./__input/_type_error/popup__input_type_error.css);
+@import url(./__button/_disabled/popup__button_disabled.css);
+@import url(./__button/_confirm/popup__button_confirm.css);
+
+.popup {
+  min-width: 1280px;
+  min-height: 100%;
+  position: fixed;
+  top: 0;
+  right: auto;
+  background-color: rgba(0, 0, 0, 0.5);
+  margin: 0 auto;
+  align-items: center;
+  visibility: hidden;
+  transition: all .3s ease-in-out;
+  opacity: 0;
+}
+
+@media all and (max-width: 1080px) {
+  .popup {
+    min-width: 100%;
+  }
+}
