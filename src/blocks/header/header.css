@@ -6,6 +6,8 @@
 @import url(./__user/header__user.css);
 
 .header {
+  display: flex;
+  justify-content: space-between;
   min-width: calc(100% - 398px);
   margin: 0 auto;
   padding-top: 45px;

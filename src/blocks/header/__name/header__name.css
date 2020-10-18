@@ -13,3 +13,9 @@
   color: #ccc;
   transition: .7s ease;
 }
+
+@media all and (max-width: 1080px) {
+  .header__name {
+    margin-right: 30px;
+  }
+}

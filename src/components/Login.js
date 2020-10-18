@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import Header from './Header';
 import Footer from './Footer';
 
-function Register({ onRegister }) {
+const Login = ({ onLogin }) => {
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
 
@@ -18,17 +18,19 @@ function Register({ onRegister }) {
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
+
     if (!email || !password) {
       console.log('Не все поля заполнены');
       return;
-    }
-    onRegister(email, password)
+    } else {
+    onLogin(email, password)
     resetForm();
+    }
   };
 
   return (
     <>
-      <Header headerName="Войти" />
+      <Header headerName="Регистрация" />
       <section className="register">
         <form
           className="register__form"
@@ -36,7 +38,7 @@ function Register({ onRegister }) {
           noValidate>
           <h2
             className="register__header">
-            Регистрация
+            Вход
         </h2>
           <input
             type="email"
@@ -51,20 +53,19 @@ function Register({ onRegister }) {
             placeholder="Password"
             value={password}
             name="Password"
-            onChange={handleChange}>
+            onChange={handleChange}
+          >
           </input>
           <button
             type="submit"
             className="register__button">
-            Зарегистрироваться
+            Войти
            </button>
           <div className="register__signin">
-            <p className="register__login-text">
-              Уже зарегистрированы?
-              </p>
-            <Link to='/sign-in'
+            <p className="register__login-text">Еще не зарегистрированы?</p>
+            <Link to='/sign-up'
               className="register__login-link">
-              Войти
+              Регистрация
             </Link>
           </div>
         </form>
@@ -74,4 +75,4 @@ function Register({ onRegister }) {
   );
 }
 
-export default Register;
+export default Login;

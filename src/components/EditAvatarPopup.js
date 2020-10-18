@@ -32,7 +32,7 @@ function EditAvatarPopup(props) {
         ref={avatarRef}
         placeholder="Ссылка на картинку"
         name="link"
-        id="link"
+        // id="link"
         required
       />
       <span

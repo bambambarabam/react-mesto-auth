@@ -1,19 +1,23 @@
 import React from 'react';
 import api from '../utils/api';
 
-import { Route, Switch, Redirect, useHistory, useLocation } from 'react-router-dom';
+import { Route, Switch, Redirect, useHistory } from 'react-router-dom';
 
-import Header from './Header';
 import Main from './Main';
-import Footer from './Footer';
 import AddPlacePopup from './AddPlacePopup';
 import EditProfilePopup from './EditProfilePopup';
 import EditAvatarPopup from './EditAvatarPopup';
 import PopupWithConfirm from './PopupWithConfirm';
 import ImagePopup from './ImagePopup';
 import Register from './Register';
+import Login from './Login';
+import InfoTooltip from './InfoTooltip';
 import ProtectedRoute from './ProtectedRoute';
+import * as auth from '../utils/auth';
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
+
+import success from '../images/success.svg';
+import fail from '../images/fail.svg';
 
 function App() {
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false)
@@ -28,6 +32,11 @@ function App() {
   const [cards, setCards] = React.useState([]);
 
   const [loggedIn, setLoggedIn] = React.useState(false);
+  const [userData, setUserData] = React.useState('');
+  const [isInfoTooltipOpen, setIsInfoTooltipOpen] = React.useState(false);
+  const [isInfoTooltipSuccess, setIsInfoTooltipSuccess] = React.useState({});
+
+  const history = useHistory();
 
   React.useEffect(() => {
     Promise.all([
@@ -42,6 +51,10 @@ function App() {
         console.log(err);
       });
   }, []);
+
+  function onInfoTooltip() {
+    setIsInfoTooltipOpen(true)
+  }
 
   function handleCardLike(card) {
     const isLiked = card.likes.some(i => i._id === currentUser._id);
@@ -144,19 +157,95 @@ function App() {
     setIsEditAvatarPopupOpen(false);
     setIsConfirmPopupOpen(false);
     setSelectedCard(false);
+    setIsInfoTooltipOpen(false);
+  }
+
+  function tokenCheck() {
+    const jwt = localStorage.getItem('token');
+    if (jwt) {
+      auth.getContent(jwt)
+        .then((res) => {
+          if (res) {
+            setLoggedIn(true);
+            setUserData(res.data.email);
+            history.push('/');
+          } else {
+            setIsInfoTooltipSuccess({ message: 'Что-то пошло не так! Попробуйте ещё раз.', icon: fail });
+            onInfoTooltip();
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        })
+    }
+  }
+
+  React.useEffect(() => {
+    tokenCheck()
+  }, [])
+
+
+  function onRegister(email, password) {
+    auth.register(email, password)
+      .then(() => {
+        setIsInfoTooltipSuccess({ message: 'Вы успешно зарегистрировались!', icon: success });
+        history.push('/sign-in');
+      })
+      .catch((err) => setIsInfoTooltipSuccess({ message: `Что-то пошло не так! Попробуйте ещё раз.`, icon: fail }));
+    onInfoTooltip();
+  }
+
+  function onLogin(email, password) {
+    auth.authorize(escape(email), escape(password))
+      .then((data) => {
+        auth.getContent(data.token)
+          .then((res) => {
+            setUserData(res.data.email);
+          })
+          .catch((err) => setIsInfoTooltipSuccess({ message: `Что-то пошло не так! Попробуйте ещё раз.`, icon: fail }));
+        setIsInfoTooltipSuccess({ message: 'Вы успешно вошли!', icon: success });
+        setLoggedIn(true);
+        history.push('/');
+      })
+      .catch((err) => setIsInfoTooltipSuccess({ message: `Что-то пошло не так! Попробуйте ещё раз.`, icon: fail }));
+    onInfoTooltip();
+  }
+
+  function onSignOut() {
+    setLoggedIn(false);
+    localStorage.removeItem('token');
+    setUserData('');
+    history.push('/sign-in');
   }
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
-      <Main
-        onEditProfile={handleEditProfileClick}
-        onAddPlace={handleAddPlaceClick}
-        onEditAvatar={handleEditAvatarClick}
-        cards={cards}
-        onCardClick={handleCardClick}
-        onCardLike={handleCardLike}
-        onCardDelete={handleCardDelete}
-      />
+      <div className="page">
+        <Switch>
+          <ProtectedRoute exact path='/'
+            loggedIn={loggedIn}
+            component={Main}
+            onEditProfile={handleEditProfileClick}
+            onAddPlace={handleAddPlaceClick}
+            onEditAvatar={handleEditAvatarClick}
+            onCardClick={handleCardClick}
+            cards={cards}
+            onCardLike={handleCardLike}
+            onCardDelete={handleCardDelete}
+            userData={userData}
+            onSignOut={onSignOut}
+          />
+          <Route path='/sign-up'>
+            <Register onRegister={onRegister} />
+          </Route>
+          <Route path='/sign-in'>
+            <Login onLogin={onLogin} />
+          </Route>
+          <Route>
+            {<Redirect to={`${loggedIn ? '/' : '/sign-in'}`} />}
+          </Route>
+        </Switch>
+      </div>
       <EditProfilePopup
         isOpen={isEditProfilePopupOpen}
         onClose={closeAllPopups}
@@ -185,31 +274,13 @@ function App() {
         onClose={closeAllPopups}
         onSubmit={handleCardDeleteSubmit}
       />
-      <div className="page">
-        <Switch>
-          <ProtectedRoute exact path='/'
-            loggedIn={loggedIn}
-            component={Page}
-            onEditProfile={onEditProfile}
-            onAddPlace={onAddPlace}
-            onEditAvatar={onEditAvatar}
-            onCardClick={handleCardClick}
-            cards={cards}
-            onCardLike={handleCardLike}
-            userData={userData}
-            signOut={signOut}
-          />
-          <Route path='/sign-up'>
-            <Register handleRegister={handleRegister} />
-          </Route>
-          <Route path='/sign-in'>
-            <Login handleLogin={handleLogin} />
-          </Route>
-          <Route>
-            {<Redirect to={`${loggedIn ? '/' : '/sign-up'}`} />}
-          </Route>
-        </Switch>
-      </div>
+      <InfoTooltip
+        isOpen={isInfoTooltipOpen}
+        onClose={closeAllPopups}
+        icon={isInfoTooltipSuccess.icon}
+        text={isInfoTooltipSuccess.message}
+      />
+
     </CurrentUserContext.Provider>
   );
 }
