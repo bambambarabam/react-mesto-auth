@@ -5,3 +5,9 @@
   margin-bottom: 46px;
   align-self: center;
 }
+
+@media all and (max-width: 1080px) {
+  .header__info {
+    flex-wrap: wrap;
+  }
+}

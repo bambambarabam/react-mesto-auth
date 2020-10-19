@@ -184,15 +184,14 @@ function App() {
     tokenCheck()
   }, [])
 
-
   function onRegister(email, password) {
     auth.register(email, password)
       .then(() => {
         setIsInfoTooltipSuccess({ message: 'Вы успешно зарегистрировались!', icon: success });
         history.push('/sign-in');
       })
-      .catch((err) => setIsInfoTooltipSuccess({ message: `Что-то пошло не так! Попробуйте ещё раз.`, icon: fail }));
-    onInfoTooltip();
+      .catch((err) => setIsInfoTooltipSuccess({ message: `Что-то пошло не так! Попробуйте ещё раз.`, icon: fail }))
+      .finally(onInfoTooltip())
   }
 
   function onLogin(email, password) {
@@ -207,8 +206,8 @@ function App() {
         setLoggedIn(true);
         history.push('/');
       })
-      .catch((err) => setIsInfoTooltipSuccess({ message: `Что-то пошло не так! Попробуйте ещё раз.`, icon: fail }));
-    onInfoTooltip();
+      .catch((err) => setIsInfoTooltipSuccess({ message: `Что-то пошло не так! Попробуйте ещё раз.`, icon: fail }))
+      .finally(onInfoTooltip())
   }
 
   function onSignOut() {

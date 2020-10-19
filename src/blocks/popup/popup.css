@@ -17,21 +17,22 @@
 .popup {
   font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
   color: #fff;
-  min-width: 1280px;
+  min-width: 100vw;
   min-height: 100%;
   position: fixed;
   top: 0;
   right: auto;
   background-color: rgba(0, 0, 0, 0.5);
   margin: 0 auto;
+  display: flex;
   align-items: center;
   visibility: hidden;
   transition: all .3s ease-in-out;
   opacity: 0;
 }
-
+/*
 @media all and (max-width: 1080px) {
   .popup {
     min-width: 100%;
   }
-}
+} */

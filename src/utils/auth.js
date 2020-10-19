@@ -53,5 +53,4 @@ export const getContent = (token) => {
         return res.json();
       else return Promise.reject(res.status);
     })
-    .then((data) => data);
 }
