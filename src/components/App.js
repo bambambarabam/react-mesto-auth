@@ -191,7 +191,9 @@ function App() {
         history.push('/sign-in');
       })
       .catch((err) => setIsInfoTooltipSuccess({ message: `Что-то пошло не так! Попробуйте ещё раз.`, icon: fail }))
-      .finally(onInfoTooltip())
+      .finally(() => {
+        onInfoTooltip();
+      })
   }
 
   function onLogin(email, password) {
@@ -207,7 +209,9 @@ function App() {
         history.push('/');
       })
       .catch((err) => setIsInfoTooltipSuccess({ message: `Что-то пошло не так! Попробуйте ещё раз.`, icon: fail }))
-      .finally(onInfoTooltip())
+      .finally(() => {
+        onInfoTooltip();
+      })
   }
 
   function onSignOut() {
