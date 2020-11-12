@@ -9,7 +9,8 @@ function Main(props) {
 
   return (
     <>
-      <Header headerUser={props.userData}
+      <Header
+        userEmail={props.userEmail}
         loggedIn={props.loggedIn}
         onSignOut={props.onSignOut}
       />

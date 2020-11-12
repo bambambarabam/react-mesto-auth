@@ -19,10 +19,9 @@ function Register({ onRegister }) {
   const handleSubmit = (evt) => {
     evt.preventDefault();
     if (!email || !password) {
-      console.log('Не все поля заполнены');
       return;
     }
-    onRegister(email, password)
+    onRegister(email, password);
     resetForm();
   };
 
@@ -62,7 +61,7 @@ function Register({ onRegister }) {
             <p className="register__login-text">
               Уже зарегистрированы?
               </p>
-            <Link to='/sign-in'
+            <Link to='/signin'
               className="register__login-link">
               Войти
             </Link>

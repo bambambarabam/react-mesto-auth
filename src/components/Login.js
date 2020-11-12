@@ -18,13 +18,11 @@ const Login = ({ onLogin }) => {
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
-
     if (!email || !password) {
-      console.log('Не все поля заполнены');
       return;
     } else {
-    onLogin(email, password)
-    resetForm();
+      onLogin(email, password);
+      resetForm();
     }
   };
 
@@ -63,7 +61,7 @@ const Login = ({ onLogin }) => {
            </button>
           <div className="register__signin">
             <p className="register__login-text">Еще не зарегистрированы?</p>
-            <Link to='/sign-up'
+            <Link to='/signup'
               className="register__login-link">
               Регистрация
             </Link>

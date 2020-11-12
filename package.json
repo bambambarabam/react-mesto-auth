@@ -1,9 +1,9 @@
 {
-  "name": "react-mesto-auth",
+  "name": "frontend-mesto",
   "version": "0.1.0",
   "description": "project work #14",
   "author": "Slava Lebedintsev",
-  "homepage": "https://bambambarabam.github.io/react-mesto-auth/",
+  "homepage": "https://mestotech.xyz/",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
@@ -18,6 +18,7 @@
     "start": "react-scripts start",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
+    "depoy-vm": "npm run build && scp -r ./build/* carved@178.154.225.211:/home/carved/frontend-mesto",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
