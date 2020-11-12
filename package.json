@@ -18,7 +18,6 @@
     "start": "react-scripts start",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
-    "depoy-vm": "npm run build && scp -r ./build/* carved@178.154.225.211:/home/carved/frontend-mesto",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
